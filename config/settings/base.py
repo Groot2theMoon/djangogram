@@ -42,8 +42,8 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default="postgres://localhost/djangogrom",
-    ),
+        default="postgres://postgres:1234@localhost:5432/djangogrom"
+    )
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
@@ -78,8 +78,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "djangogrom.users",
+    "djangogrom.users.apps.UsersConfig",
     # Your stuff: custom apps go here
+    "djangogrom.posts.apps.PostsConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
