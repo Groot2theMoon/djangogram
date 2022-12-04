@@ -1,5 +1,6 @@
 <h1>Here is SignUp page</h1>
 
+{% block content %}
 <form action="{% url 'users:signup'%}" method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -13,3 +14,4 @@
 </form>
 
 <a href="{% url 'users:main' %}">Login</a>
+{% endblock content %}
