@@ -24,7 +24,7 @@ def post_create(request):
             )
             new_post.save()
 
-            return render(request, 'posts/base.html')
+            return render(request, 'post/base.html')
 
         else:
             return render(request, 'users/main.html')
