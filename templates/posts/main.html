@@ -22,7 +22,7 @@
                 <i class="fa fa-pencil fa1x"></i>
                 <i class="fa fa-trash-o fa1x"></i>
             </div>
-            
+
         </div>
         
         <!-- IMAGE -->
@@ -43,7 +43,7 @@
             <div class="comment">
                 {% for comment in post.comment_post %}
                     <div id="comment-{{ comment.id }}">
-                        <!-- {{ comment.author.username }} -->
+                        <b>{{ comment.author.username }}</b> 
                         {{ comment.contents }}
                     </div>
                 {% endfor %}
