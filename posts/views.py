@@ -26,7 +26,7 @@ def index(request):
                 request, 
                 'posts/main.html', 
                 {"posts": serializer.data, "comment_form": comment_form}
-                )
+            )
 
 def post_create(request):
     if request.method == 'GET':
