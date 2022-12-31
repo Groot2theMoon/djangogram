@@ -16,9 +16,14 @@ class Post(TimeStamedModel):
             on_delete=models.CASCADE,
             related_name= 'post_author'
         )
-    image = models.ImageField(blank=True)
-    caption = models.TextField(blank=True)
-    image_likes = models.ManyToManyField(user_model.User, related_name='post_image_likes')
+    image = models.ImageField(blank=False)
+    caption = models.TextField(blank=False)
+    image_likes = models.ManyToManyField(
+                    user_model.User, 
+                    related_name='post_image_likes'
+                )
+    def __str__(self):
+        return f"{self.author}: {self.caption}"
     
 class Comment(TimeStamedModel):
     author = models.ForeignKey(
@@ -34,3 +39,6 @@ class Comment(TimeStamedModel):
             related_name= 'comment_post'
         )
     contents = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.author}: {self.contents}"
