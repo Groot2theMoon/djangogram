@@ -1,5 +1,1 @@
-<<<<<<< Updated upstream
 Daniel Roy Greenfeld
-=======
-Daniel Roy Greenfeld
->>>>>>> Stashed changes
