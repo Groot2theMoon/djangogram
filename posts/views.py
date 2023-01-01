@@ -5,7 +5,7 @@ from django.urls import reverse
 from djangogrom.users.models import User as user_model
 
 from . import models, serializers
-from .forms import CreatePostForm, CommentForm
+from .forms import CreatePostForm, UpdatePostForm, CommentForm
 
 # Create your views here.
 def index(request):
@@ -59,6 +59,29 @@ def post_create(request):
         else:
             return render(request, 'users/main.html')
 
+def post_update(request, post_id):
+    if request.user.is_authenticated:
+        #check author
+        post = get_object_or_404(models.Post, pk=post_id)
+        if request.user != post.author:
+            return redirect(reverse('posts:index'))
+
+        #request GET
+        if request.method == 'GET':
+            form = UpdatePostForm(instance=post)
+            return render(
+                request, 
+                'posts/post_update.html',
+                {"form": form, "post": post}
+            )
+        
+        elif request.method == 'POST':
+            #업데이트 버튼 클릭 후 저장을 위한 POST api logic request
+            pass
+
+        else:
+            return render(request, 'users/main.html')
+            
 def comment_create(request, post_id):
     if request.user.is_authenticated:
         post = get_object_or_404(models.Post, pk=post_id)
