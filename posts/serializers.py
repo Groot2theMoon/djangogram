@@ -13,6 +13,7 @@ class FeedAuthorSerializer(serializers.ModelSerializer):
         )
 
 class CommentSerializer(serializers.ModelSerializer):
+    author = FeedAuthorSerializer()
     class Meta:
         model = models.Comment
         fields = (
