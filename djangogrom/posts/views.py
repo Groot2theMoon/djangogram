@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.http import JsonResponse
 
 from djangogrom.users.models import User as user_model
 
@@ -113,3 +114,26 @@ def comment_delete(request, comment_id):
 
     else: 
         return render(request, 'users/main.html')
+
+def post_like(request, post_id):
+    response_body = {"result": ""}
+
+    if request.user.is_authenticated:
+        post = get_object_or_404(models.Post, pk=post_id)
+        existed_user = post.image_likes.filter(pk=request.user.id).exists()
+
+        if existed_user:
+            #좋아요 누른 상태에선 좋아요 취소
+            post.image_likes.remove(request.user)
+            response_body["result"] = "dislike"
+
+        else:
+            #좋아요가 아닐때는 좋아요로 수정
+            post.image_likes.add(request.user)
+            response_body["result"] = "like"
+
+        post.save()
+        return JsonResponse(status=200, data=response_body)
+
+    else:
+        return JsonResponse(status=403, data=response_body)
