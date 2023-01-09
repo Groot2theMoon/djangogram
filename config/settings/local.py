@@ -11,7 +11,7 @@ SECRET_KEY = env(
     default="uCY8J8LMMLwA0S7SNn5pYBmE9VT5DKvl8n0YoDt8aTXBqJjnFCi1qwDZYoEsxjrC",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.1.8", 'rc408ugrp.synology.me','rc408ugrp.pythonanywhere.com']
 
 # CACHES
 # ------------------------------------------------------------------------------
