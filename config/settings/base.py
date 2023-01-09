@@ -43,16 +43,12 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DTATBASE_USER'),
-        'PASSWORD': "qwer1234",
-        #'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': 'django-mysql-8016.cmbq6roaa5kx.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'strapi',
+        'PASSWORD': 'strapi',
+        'HOST': '192.168.1.8',
+        'PORT': '15432',
     }
 
 
