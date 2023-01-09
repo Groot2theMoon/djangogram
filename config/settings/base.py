@@ -289,15 +289,3 @@ SOCIALACCOUNT_FORMS = {"signup": "djangogrom.users.forms.UserSocialSignupForm"}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-STATICFILES_STORAGE = 'config.settings.storage.S3StaticStorage'
-DEFAULT_FILE_STORAGE = 'config.settings.storage.S3MediaStorage'
-
-#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-#AWS_ACCESS_KEY_ID = 'AKIA2MV3NWL5NBCLP65S'
-#AWS_SECRET_ACCESS_KEY = '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'
-
-AWS_S3_REGION_NAME = 'ap-northeast-2'
-AWS_STORAGE_BUCKET_NAME = 'djangogrom'
-AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
-AWS_DEFAULT_ACL = 'public-read'
