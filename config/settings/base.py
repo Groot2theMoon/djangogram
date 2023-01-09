@@ -5,6 +5,8 @@ from pathlib import Path
 
 import environ
 
+import os
+
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # djangogrom/
 APPS_DIR = ROOT_DIR / "djangogrom"
@@ -40,10 +42,24 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db(
-        "DATABASE_URL",
-        default="postgres://postgres:1234@localhost:5432/djangogrom"
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DTATBASE_USER'),
+        'PASSWORD': "qwer1234",
+        #'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': 'django-mysql-8016.cmbq6roaa5kx.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+
+
+    #"default": env.db(
+    #    "DATABASE_URL",
+    #    default="postgres://postgres:1234@localhost:5432/djangogrom"
+    #)
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
@@ -68,6 +84,7 @@ DJANGO_APPS = [
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    "storages",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -276,3 +293,15 @@ SOCIALACCOUNT_FORMS = {"signup": "djangogrom.users.forms.UserSocialSignupForm"}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+STATICFILES_STORAGE = 'config.settings.storage.S3StaticStorage'
+DEFAULT_FILE_STORAGE = 'config.settings.storage.S3MediaStorage'
+
+#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+#AWS_ACCESS_KEY_ID = 'AKIA2MV3NWL5NBCLP65S'
+#AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+AWS_STORAGE_BUCKET_NAME = 'djangogrom'
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
+AWS_DEFAULT_ACL = 'public-read'
